@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import ResultPage from './pages/ResultPage';
 import HomePage from "./pages/HomePage";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="result" element={<ResultPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="/order" element={<OrderPage />} />
       </Routes>
       </BrowserRouter>
       </React.StrictMode>

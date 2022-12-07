@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function ResultPage(props) {
       const [posts, setPosts] = useState([]);
@@ -22,7 +21,7 @@ export default function ResultPage(props) {
   
 
   async function getData(dish) {
-    const url = `https://dishes-c89c9-default-rtdb.europe-west1.firebasedatabase.app/basement/${dish}/ingredients.json`;
+    const url = `https://dishes-c89c9-default-rtdb.europe-west1.firebasedatabase.app/dishes/${dish}/ingredients.json`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -30,7 +29,7 @@ export default function ResultPage(props) {
         
       useEffect(() => {
           async function getPosts() {
-            let postsArray = [];
+            // let postsArray = [];
             let database = [];
             let data;
 
@@ -38,8 +37,6 @@ export default function ResultPage(props) {
               data = await getData(dish);
               database.push(...data);
             }
-
-            console.log(database)
 
             if (data !== null) {
               /*postsArray = Object.keys(database).map((key) => ({
@@ -57,9 +54,9 @@ export default function ResultPage(props) {
     
      function handleSubmit(e) {
         e.preventDefault();
-        navigate('result', {
+        navigate('/order', {
             state: {
-                dishlist: checked
+                ingredientslist: checked
             }
         })
      }
@@ -71,7 +68,7 @@ export default function ResultPage(props) {
             <div className="flexbox">
               {posts.map((post, index) => (
                 <div className="card_container" key={index}> 
-                <span className="ident">{index}</span>
+                  <span className="ident">{index}</span>
                 <section className="card">
                   <div className="english">
                     <p>[Id]</p>
@@ -83,7 +80,7 @@ export default function ResultPage(props) {
                     <p>{post.name}</p>
                   </div>
                   <div>
-                      <input type="checkbox" value={index} onChange={handleCheck} ></input>
+                      <input type="checkbox" value={post.name} onChange={handleCheck} ></input>
                   </div>
                   </section>
               </div>
@@ -96,9 +93,3 @@ export default function ResultPage(props) {
         </form>
       );
     }
-
-
-/* return <div>
-        <p>Dishlist: {location.state.dishlist} </p>
-        </div>
-*/

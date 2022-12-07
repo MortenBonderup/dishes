@@ -21,7 +21,7 @@ export default function HomePage() {
   useEffect(() => {
     async function getPosts() {
       const url =
-        "https://dishes-c89c9-default-rtdb.europe-west1.firebasedatabase.app/basement.json";
+        "https://dishes-c89c9-default-rtdb.europe-west1.firebasedatabase.app/dishes.json";
       const response = await fetch(url);
       const data = await response.json();
       
@@ -40,7 +40,7 @@ export default function HomePage() {
 
  function handleSubmit(e) {
     e.preventDefault();
-    navigate('result', {
+    navigate('/result', {
         state: {
             dishlist: checked
         }
@@ -54,7 +54,7 @@ export default function HomePage() {
         <div className="flexbox">
           {posts.map((post, index) => (
             <div className="card_container" key={post.id}> 
-            <span className="ident">{index}</span>
+            <span className="ident">{post.place}</span>
             <section className="card">
               <div className="english">
                 <p>[Id]</p>
