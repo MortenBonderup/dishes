@@ -50,7 +50,7 @@ export default function ResultPage(props) {
             }
         
         getPosts();
-      }, []);
+      }, [location.state.dishlist]);
     
      function handleSubmit(e) {
         e.preventDefault();

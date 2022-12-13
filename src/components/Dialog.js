@@ -13,7 +13,9 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+const emails = JSON.parse(sessionStorage.getItem("ingredientslist"));
+
+console.log(emails)
 
 function SimpleDialog(props) {
 
@@ -28,7 +30,7 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Ingredients</DialogTitle>
       <List sx={{ pt: 0 }}>
         {emails.map((email) => (
           <ListItem button onClick={() => handleListItemClick(email)} key={email}>

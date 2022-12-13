@@ -4,22 +4,23 @@ import SimpleDialogDemo from "../components/Dialog";
 
 export default function OrderPage(props) {
   const location = useLocation();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(location.state.ingredientslist);
   const [usermessage, setMessage] = useState("");
   const [username, setName] = useState("");
   const [isPosts, setIsPosts] = useState(true); // isPosts can be true or false
   const navigate = useNavigate();
-  
+   
   useEffect(() => {
     async function getPosts() {
       if (location.state.ingredientslist.length > 0) {
         setPosts(location.state.ingredientslist);
+        sessionStorage.setItem("ingredientslist", JSON.stringify(location.state.ingredientslist))
       } else {
         setIsPosts(false);
       }
     }
     getPosts();
-  }, []);
+  }, [location.state.ingredientslist]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -64,7 +65,7 @@ export default function OrderPage(props) {
             <p>Nothing to show</p>
           )}
       <button>Save list</button>
-      <SimpleDialogDemo post={posts}></SimpleDialogDemo>
+      <SimpleDialogDemo></SimpleDialogDemo>
         </form>
       );
 }
