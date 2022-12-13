@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import SimpleDialogDemo from "../components/Dialog";
 
 export default function OrderPage(props) {
   const location = useLocation();
@@ -62,7 +63,8 @@ export default function OrderPage(props) {
           ) : (
             <p>Nothing to show</p>
           )}
-          <button>Save list</button>
+      <button>Save list</button>
+      <SimpleDialogDemo post={posts}></SimpleDialogDemo>
         </form>
       );
 }
