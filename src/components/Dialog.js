@@ -13,13 +13,10 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 
-const emails = JSON.parse(sessionStorage.getItem("ingredientslist"));
-
-console.log(emails)
 
 function SimpleDialog(props) {
 
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, emails } = props;
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -60,11 +57,21 @@ SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   selectedValue: PropTypes.string.isRequired,
+  emails: PropTypes.array.isRequired
 };
 
 export default function SimpleDialogDemo() {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  const [selectedValue, setSelectedValue] = React.useState("default");
+  const [emails, setEmails] = React.useState([])
+
+  React.useEffect(() => {
+    async function getPosts() {
+      setEmails(JSON.parse(sessionStorage.getItem("ingredientslist")))
+      setSelectedValue(emails[0]);
+    }
+    getPosts();
+  }, [])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -88,6 +95,7 @@ export default function SimpleDialogDemo() {
         selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
+        emails={emails}
       />
     </div>
   );
